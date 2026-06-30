@@ -1,0 +1,77 @@
+@import 'tailwindcss';
+
+@layer base {
+  :root {
+    --blue: #0f5ed7;
+    --blue-light: #5b9df8;
+    --gold: #ffc20a;
+    --gold-dark: #9b6b00;
+    --bg: #f7faff;
+    --surface: #fff;
+    --soft: #f2f6fd;
+    --low: #eaf1fb;
+    --text: #0b1f4d;
+    --soft-text: #30476f;
+    --muted: #6f7f99;
+    --border: #dde6f3;
+    --shadow: 0 10px 30px rgba(27, 58, 102, 0.08);
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Inter', 'Be Vietnam Pro', system-ui, sans-serif;
+    color: var(--text);
+    background: var(--bg);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.5;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center gap-2 font-bold rounded-xl px-5 py-3 text-sm cursor-pointer border-none transition-all;
+  }
+
+  .btn-gold {
+    @apply bg-[#ffc20a] text-[#0b2a5b] hover:bg-[#ffb800];
+  }
+
+  .btn-primary {
+    @apply bg-[#0f5ed7] text-white hover:bg-[#0d4fa8];
+  }
+
+  .btn-ghost {
+    @apply bg-transparent text-white border border-white/55 hover:bg-white/10;
+  }
+
+  .eyebrow {
+    @apply text-xs font-bold uppercase tracking-widest text-[#0f5ed7];
+  }
+
+  .sec-title {
+    @apply text-2xl md:text-3xl font-black -tracking-wider text-center text-[#0b1f4d];
+  }
+
+  .card {
+    @apply border border-[#dde6f3] rounded-2xl p-6 bg-white;
+  }
+
+  .wrap {
+    @apply max-w-6xl mx-auto px-7;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Hide Next.js DevTools Indicator */
+nextjs-portal,
+[data-nextjs-toast] {
+  display: none !important;
+}
