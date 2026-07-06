@@ -1,8 +1,8 @@
 'use client'
 
-import { Search, ChevronDown, Filter, Zap, Users, DollarSign, TrendingUp, Star, MapPin } from 'lucide-react'
+import { Search, ChevronDown, Filter, Zap, Users, DollarSign, TrendingUp, Star, MapPin, X, Briefcase, Info } from 'lucide-react'
 import { useState, useMemo } from 'react'
-import { mockMajors, mockUniversities } from '@/lib/mockData'
+import { mockMajors, mockUniversities, Major } from '@/lib/mockData'
 
 export default function ExploreMajors() {
   const [examGroupFilter, setExamGroupFilter] = useState('all')
@@ -11,6 +11,7 @@ export default function ExploreMajors() {
   const [scoreFilter, setScoreFilter] = useState('all')
   const [tuitionFilter, setTuitionFilter] = useState('all')
   const [sortBy, setSortBy] = useState('popular')
+  const [selectedMajor, setSelectedMajor] = useState<Major | null>(null)
 
   // Derive unique exam groups from mock data
   const uniqueExamGroups = Array.from(
@@ -244,7 +245,10 @@ export default function ExploreMajors() {
                     {major.duration} năm học
                   </div>
                 </div>
-                <button className="w-full py-2 bg-white border border-blue-200 text-blue-600 rounded-lg font-medium hover:bg-blue-50 transition-colors text-sm">
+                <button 
+                  onClick={() => setSelectedMajor(major)}
+                  className="w-full py-2 bg-white border border-blue-200 text-blue-600 rounded-lg font-medium hover:bg-blue-50 transition-colors text-sm"
+                >
                   Xem chi tiết
                 </button>
               </div>
@@ -257,6 +261,88 @@ export default function ExploreMajors() {
           )}
         </div>
       </div>
+
+      {/* Modal */}
+      {selectedMajor && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
+          <div className="bg-white rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl">
+            {/* Modal Header */}
+            <div className={`p-6 ${selectedMajor.color} relative`}>
+              <button 
+                onClick={() => setSelectedMajor(null)}
+                className="absolute top-4 right-4 text-gray-500 hover:text-gray-900 bg-white/50 hover:bg-white rounded-full p-2 transition-colors"
+              >
+                <X size={20} />
+              </button>
+              <div className="flex items-center gap-4">
+                <div className="text-4xl bg-white p-3 rounded-xl shadow-sm">
+                  {selectedMajor.icon}
+                </div>
+                <div>
+                  <h2 className="text-2xl font-bold text-gray-900">{selectedMajor.name}</h2>
+                  <div className="flex items-center gap-1 mt-1 text-gray-700">
+                    <MapPin size={16} />
+                    <span>{selectedMajor.schoolName}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Modal Content */}
+            <div className="p-6 space-y-6">
+              {/* Description */}
+              <div>
+                <div className="flex items-center gap-2 mb-2">
+                  <Info size={20} className="text-blue-500" />
+                  <h3 className="text-lg font-bold text-gray-900">Mô tả ngành học</h3>
+                </div>
+                <p className="text-gray-700 leading-relaxed">
+                  {selectedMajor.description || 'Chưa có mô tả cho ngành học này.'}
+                </p>
+              </div>
+
+              {/* Jobs */}
+              <div>
+                <div className="flex items-center gap-2 mb-3">
+                  <Briefcase size={20} className="text-blue-500" />
+                  <h3 className="text-lg font-bold text-gray-900">Cơ hội việc làm</h3>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  {selectedMajor.suggestedJobs?.map((job, index) => (
+                    <div key={index} className="flex items-center gap-2 bg-gray-50 p-3 rounded-lg border border-gray-100">
+                      <div className="w-1.5 h-1.5 rounded-full bg-blue-500 flex-shrink-0" />
+                      <span className="text-gray-700 text-sm font-medium">{job}</span>
+                    </div>
+                  ))}
+                  {(!selectedMajor.suggestedJobs || selectedMajor.suggestedJobs.length === 0) && (
+                    <div className="text-gray-500 text-sm">Chưa có dữ liệu việc làm.</div>
+                  )}
+                </div>
+              </div>
+
+              {/* Key Stats */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-4 border-t border-gray-100">
+                <div className="bg-blue-50 p-3 rounded-xl text-center">
+                  <div className="text-sm text-blue-600 font-medium mb-1">Điểm chuẩn</div>
+                  <div className="text-xl font-bold text-blue-900">{selectedMajor.score}</div>
+                </div>
+                <div className="bg-green-50 p-3 rounded-xl text-center">
+                  <div className="text-sm text-green-600 font-medium mb-1">Học phí</div>
+                  <div className="text-xl font-bold text-green-900">{selectedMajor.tuitionFee > 0 ? `${selectedMajor.tuitionFee}tr` : '0đ'}</div>
+                </div>
+                <div className="bg-purple-50 p-3 rounded-xl text-center">
+                  <div className="text-sm text-purple-600 font-medium mb-1">Thời gian</div>
+                  <div className="text-xl font-bold text-purple-900">{selectedMajor.duration} năm</div>
+                </div>
+                <div className="bg-orange-50 p-3 rounded-xl text-center">
+                  <div className="text-sm text-orange-600 font-medium mb-1">Nhu cầu</div>
+                  <div className="text-xl font-bold text-orange-900">{selectedMajor.demand}/5</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

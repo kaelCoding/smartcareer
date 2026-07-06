@@ -9,6 +9,9 @@ export type University = {
   rating: number;
   color: string;
   icon: string;
+  website: string;
+  tuitionRange: string;
+  tuitionNote: string;
 }
 
 export type Major = {
@@ -27,6 +30,9 @@ export type Major = {
   duration: number; // in years
   students: number;
   category: string;
+  description?: string;
+  suggestedJobs?: string[];
+  code: string;
 }
 
 export const mockUniversities: University[] = [
@@ -41,6 +47,9 @@ export const mockUniversities: University[] = [
     rating: 4.8,
     color: 'bg-red-600',
     icon: '⚙️',
+    website: 'https://dut.udn.vn',
+    tuitionRange: '22 - 28 triệu/năm',
+    tuitionNote: 'Tăng tối đa 10% mỗi năm theo quy định của nhà nước.',
   },
   {
     id: 'DUE',
@@ -53,6 +62,9 @@ export const mockUniversities: University[] = [
     rating: 4.7,
     color: 'bg-green-600',
     icon: '💼',
+    website: 'https://due.udn.vn',
+    tuitionRange: '20 - 25 triệu/năm',
+    tuitionNote: 'Học phí các chương trình chất lượng cao khoảng 35 triệu/năm.',
   },
   {
     id: 'UFLS',
@@ -65,6 +77,9 @@ export const mockUniversities: University[] = [
     rating: 4.6,
     color: 'bg-blue-600',
     icon: '🌍',
+    website: 'https://ufl.udn.vn',
+    tuitionRange: '15 - 20 triệu/năm',
+    tuitionNote: 'Mức học phí tùy thuộc vào ngành ngôn ngữ chuyên sâu.',
   },
   {
     id: 'UED',
@@ -77,6 +92,39 @@ export const mockUniversities: University[] = [
     rating: 4.5,
     color: 'bg-purple-600',
     icon: '👩‍🏫',
+    website: 'https://ued.udn.vn',
+    tuitionRange: 'Miễn học phí (Ngành SP)',
+    tuitionNote: 'Các ngành cử nhân ngoài sư phạm thu học phí từ 15-18 triệu/năm.',
+  },
+  {
+    id: 'UTE',
+    name: 'Đại học Sư phạm Kỹ thuật - Đại học Đà Nẵng',
+    shortName: 'UTE',
+    location: 'Đà Nẵng',
+    type: 'Công lập',
+    majorsCount: 20,
+    ranking: 5,
+    rating: 4.5,
+    color: 'bg-indigo-600',
+    icon: '🔧',
+    website: 'https://ute.udn.vn',
+    tuitionRange: '18 - 22 triệu/năm',
+    tuitionNote: 'Các ngành kỹ thuật thực hành có phụ phí nguyên vật liệu nhỏ.',
+  },
+  {
+    id: 'VKU',
+    name: 'Đại học CNTT và Truyền thông Việt - Hàn',
+    shortName: 'VKU',
+    location: 'Đà Nẵng',
+    type: 'Công lập',
+    majorsCount: 18,
+    ranking: 6,
+    rating: 4.6,
+    color: 'bg-cyan-600',
+    icon: '🖥️',
+    website: 'https://vku.udn.vn',
+    tuitionRange: '14 - 16 triệu/năm',
+    tuitionNote: 'Mức học phí ưu đãi nhờ sự hỗ trợ từ chính phủ Hàn Quốc.',
   },
   {
     id: 'DTU',
@@ -85,10 +133,13 @@ export const mockUniversities: University[] = [
     location: 'Đà Nẵng',
     type: 'Tư thục',
     majorsCount: 50,
-    ranking: 5,
+    ranking: 7,
     rating: 4.4,
     color: 'bg-orange-600',
     icon: '🏫',
+    website: 'https://duytan.edu.vn',
+    tuitionRange: '25 - 45 triệu/năm',
+    tuitionNote: 'Các chương trình tiên tiến/liên kết quốc tế từ 50-80 triệu/năm.',
   },
   {
     id: 'FPT',
@@ -97,10 +148,43 @@ export const mockUniversities: University[] = [
     location: 'Đà Nẵng',
     type: 'Tư thục',
     majorsCount: 15,
-    ranking: 6,
+    ranking: 8,
     rating: 4.6,
     color: 'bg-orange-500',
     icon: '💻',
+    website: 'https://dnuni.fpt.edu.vn',
+    tuitionRange: '80 - 100 triệu/năm',
+    tuitionNote: 'Đã bao gồm chi phí giáo trình và các kỳ thực tập OJT doanh nghiệp.',
+  },
+  {
+    id: 'UDA',
+    name: 'Đại học Đông Á',
+    shortName: 'UDA',
+    location: 'Đà Nẵng',
+    type: 'Tư thục',
+    majorsCount: 30,
+    ranking: 9,
+    rating: 4.3,
+    color: 'bg-rose-500',
+    icon: '🌸',
+    website: 'https://donga.edu.vn',
+    tuitionRange: '20 - 30 triệu/năm',
+    tuitionNote: 'Cam kết không tăng học phí trong suốt toàn khóa học.',
+  },
+  {
+    id: 'DAU',
+    name: 'Đại học Kiến trúc Đà Nẵng',
+    shortName: 'DAU',
+    location: 'Đà Nẵng',
+    type: 'Tư thục',
+    majorsCount: 25,
+    ranking: 10,
+    rating: 4.2,
+    color: 'bg-yellow-600',
+    icon: '🏛️',
+    website: 'https://dau.edu.vn',
+    tuitionRange: '25 - 35 triệu/năm',
+    tuitionNote: 'Học phí ngành kiến trúc và thiết kế thường cao hơn các ngành kinh tế.',
   },
 ]
 
@@ -120,7 +204,10 @@ export const mockMajors: Major[] = [
     icon: '💻',
     duration: 4,
     students: 350,
-    category: 'tech'
+    category: 'tech',
+    code: '7480101',
+    description: 'Ngành học chuyên nghiên cứu về cơ sở lý thuyết của thông tin và tính toán cùng sự thực hiện và ứng dụng của chúng trong các hệ thống máy tính.',
+    suggestedJobs: ['Lập trình viên (Developer)', 'Kỹ sư phần mềm', 'Chuyên viên phân tích dữ liệu', 'Kỹ sư AI/Machine Learning']
   },
   {
     id: '2',
@@ -137,7 +224,10 @@ export const mockMajors: Major[] = [
     icon: '⚙️',
     duration: 4,
     students: 600,
-    category: 'tech'
+    category: 'tech',
+    code: '7480103',
+    description: 'Chuyên ngành đào tạo các kiến thức về quy trình, phương pháp và công cụ để xây dựng, phát triển và bảo trì phần mềm một cách chuyên nghiệp.',
+    suggestedJobs: ['Kỹ sư phần mềm', 'Chuyên viên kiểm thử phần mềm (QA/QC)', 'Quản trị dự án CNTT', 'Kỹ sư hệ thống']
   },
   {
     id: '3',
@@ -154,7 +244,10 @@ export const mockMajors: Major[] = [
     icon: '📊',
     duration: 4,
     students: 800,
-    category: 'business'
+    category: 'business',
+    code: '7340101',
+    description: 'Ngành học cung cấp các kiến thức toàn diện về quản trị, từ tài chính, nhân sự, marketing đến chiến lược kinh doanh nhằm điều hành một tổ chức/doanh nghiệp hiệu quả.',
+    suggestedJobs: ['Chuyên viên phòng kế hoạch', 'Quản lý nhân sự', 'Chuyên viên phát triển kinh doanh', 'Giám đốc điều hành (CEO)']
   },
   {
     id: '4',
@@ -171,7 +264,10 @@ export const mockMajors: Major[] = [
     icon: '🇬🇧',
     duration: 4,
     students: 450,
-    category: 'language'
+    category: 'language',
+    code: '7220201',
+    description: 'Đào tạo chuyên sâu về ngôn ngữ, văn hóa, văn học các nước nói tiếng Anh, đồng thời trang bị kỹ năng giao tiếp và làm việc trong môi trường quốc tế.',
+    suggestedJobs: ['Biên phiên dịch viên', 'Chuyên viên đối ngoại', 'Giáo viên tiếng Anh', 'Hướng dẫn viên du lịch quốc tế']
   },
   {
     id: '5',
@@ -188,7 +284,10 @@ export const mockMajors: Major[] = [
     icon: '👩‍🏫',
     duration: 4,
     students: 200,
-    category: 'education'
+    category: 'education',
+    code: '7140231',
+    description: 'Ngành học kết hợp giữa kiến thức chuyên sâu về tiếng Anh và nghiệp vụ sư phạm để giảng dạy tiếng Anh tại các trường học hoặc trung tâm ngoại ngữ.',
+    suggestedJobs: ['Giáo viên tiếng Anh THCS/THPT', 'Giảng viên đại học', 'Chuyên gia xây dựng chương trình học', 'Tác giả sách giáo khoa']
   },
   {
     id: '6',
@@ -205,7 +304,10 @@ export const mockMajors: Major[] = [
     icon: '📱',
     duration: 4,
     students: 400,
-    category: 'business'
+    category: 'business',
+    code: '7340115',
+    description: 'Cung cấp kiến thức về nghiên cứu thị trường, hành vi người tiêu dùng, xây dựng thương hiệu, quảng cáo và truyền thông kỹ thuật số.',
+    suggestedJobs: ['Chuyên viên marketing digital', 'Chuyên gia PR', 'Quản lý thương hiệu (Brand Manager)', 'Nhà phân tích thị trường']
   },
   {
     id: '7',
@@ -222,7 +324,10 @@ export const mockMajors: Major[] = [
     icon: '🔒',
     duration: 4,
     students: 150,
-    category: 'tech'
+    category: 'tech',
+    code: '7480202',
+    description: 'Trang bị kỹ năng bảo vệ hệ thống mạng, dữ liệu khỏi các cuộc tấn công mạng, đồng thời có khả năng phân tích và phản ứng trước các rủi ro bảo mật.',
+    suggestedJobs: ['Chuyên viên bảo mật hệ thống', 'Kỹ sư an ninh mạng', 'Chuyên gia kiểm thử xâm nhập (Pen-tester)', 'Tư vấn an toàn thông tin']
   },
   {
     id: '8',
@@ -239,6 +344,9 @@ export const mockMajors: Major[] = [
     icon: '✈️',
     duration: 4,
     students: 300,
-    category: 'tourism'
+    category: 'tourism',
+    code: '7810103',
+    description: 'Ngành học về quản trị, điều hành các hoạt động du lịch, thiết kế tour, chăm sóc khách hàng và phát triển các sản phẩm lữ hành.',
+    suggestedJobs: ['Hướng dẫn viên du lịch', 'Điều hành tour', 'Quản lý khách sạn/resort', 'Chuyên viên tổ chức sự kiện']
   }
 ]

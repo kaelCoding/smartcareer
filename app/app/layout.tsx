@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import { Menu, X, Home, Search, BookOpen, Building2, BarChart3, FileText, Users, MessageCircle, Bell, Settings, LogOut, User } from 'lucide-react'
+import { Menu, X, Home, Search, BookOpen, Building2, BarChart3, FileText, Users, MessageCircle, Bell, Settings, LogOut, User, CreditCard, CheckSquare } from 'lucide-react'
 
 import { LogoIcon } from '@/components/LogoIcon'
 
@@ -17,11 +17,17 @@ export default function AppLayout({
     { icon: Home, label: 'Tổng quan', href: '/app', color: 'text-gray-600' },
     { icon: Search, label: 'Tìm ngành', href: '/app/kham-pha-nganh', color: 'text-gray-600' },
     { icon: Building2, label: 'Trường đại học', href: '/app/truong-dai-hoc', color: 'text-gray-600' },
+    { icon: CreditCard, label: 'Học phí', href: '/app/hoc-phi', color: 'text-gray-600' },
     { icon: BarChart3, label: 'So sánh ngành', href: '/app/compare', color: 'text-gray-600' },
   ]
 
   const bottomItems = [
+    { icon: CheckSquare, label: 'Việc cần làm', href: '/app/viec-can-lam', color: 'text-gray-600' },
     { icon: MessageCircle, label: 'Cố vấn tuyển sinh', href: '#', color: 'text-gray-600' },
+  ]
+
+  const lookupItems = [
+    { icon: FileText, label: 'Dữ liệu tuyển sinh', href: '/app/tra-cuu/du-lieu-tuyen-sinh', color: 'text-gray-600' },
   ]
 
   return (
@@ -55,6 +61,21 @@ export default function AppLayout({
           <div className="flex-1 overflow-y-auto py-4 px-3 space-y-2">
             <div className="text-xs font-bold text-gray-500 px-3 uppercase tracking-wider mb-3">KHÁM PHÁ</div>
             {menuItems.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={`flex items-center gap-3 px-3 py-2 rounded-lg transition-colors ${item.color === 'text-blue-500'
+                    ? 'text-blue-500 hover:bg-blue-50'
+                    : 'text-gray-600 hover:bg-gray-100'
+                  }`}
+              >
+                <item.icon size={20} />
+                <span className="text-sm">{item.label}</span>
+              </Link>
+            ))}
+
+            <div className="text-xs font-bold text-gray-500 px-3 uppercase tracking-wider mb-3 mt-6">TRA CỨU</div>
+            {lookupItems.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}

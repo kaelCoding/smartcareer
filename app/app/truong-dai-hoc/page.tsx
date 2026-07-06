@@ -1,6 +1,6 @@
 'use client'
 
-import { Search, MapPin, Users, Award, ChevronRight, Star } from 'lucide-react'
+import { Search, MapPin, Users, Award, ChevronRight, Star, Globe } from 'lucide-react'
 import { useState, useMemo } from 'react'
 import { mockUniversities } from '@/lib/mockData'
 
@@ -126,6 +126,18 @@ export default function Universities() {
                 </div>
                 <p className="text-sm text-gray-600 mb-3">{uni.shortName}</p>
                 <div className="flex flex-wrap gap-4 text-sm">
+                  <div className="flex items-center gap-1 text-gray-600">
+                    <Globe size={16} />
+                    <a 
+                      href={uni.website} 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="hover:text-blue-500 hover:underline"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      Website
+                    </a>
+                  </div>
                   <div className="flex items-center gap-1 text-gray-600">
                     <MapPin size={16} />
                     {uni.location}
