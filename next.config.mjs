@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'export',
-  basePath: '/smartcareer', // <-- THÊM DÒNG NÀY BẮT BUỘC
+  basePath: process.env.NODE_ENV === 'production' ? '/smartcareer' : undefined, // <-- THÊM DÒNG NÀY BẮT BUỘC
   
   typescript: {
     ignoreBuildErrors: true,

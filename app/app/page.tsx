@@ -1,9 +1,20 @@
 'use client'
 
-import { ArrowRight, BookOpen, Lightbulb, Target } from 'lucide-react'
+import { useState } from 'react'
+import { useRouter } from 'next/navigation'
+import { ArrowRight, BookOpen, Lightbulb, Target, X } from 'lucide-react'
 import Link from 'next/link'
 
 export default function AppDashboard() {
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const router = useRouter()
+
+  const handleSimulateSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    setIsModalOpen(false)
+    router.push('/app/kham-pha-nganh')
+  }
+
   return (
     <div className="p-4 md:p-8 space-y-8">
       {/* Header */}
@@ -60,13 +71,13 @@ export default function AppDashboard() {
               </p>
               <p className="text-xs text-gray-500">Thời gian: 2-3 phút</p>
             </div>
-            <Link
-              href="/app/kham-pha-nganh"
+            <button
+              onClick={() => setIsModalOpen(true)}
               className="px-6 py-3 bg-blue-500 text-white rounded-lg font-bold hover:bg-blue-600 transition-colors flex items-center gap-2 whitespace-nowrap ml-4"
             >
               <Lightbulb size={18} />
               Nhập điểm dự kiến
-            </Link>
+            </button>
           </div>
         </div>
       </div>
@@ -77,14 +88,17 @@ export default function AppDashboard() {
           <p className="text-sm font-medium text-blue-100 mb-2">TUYỂN SINH 2026 · TỔNG QUAN</p>
           <h2 className="text-4xl font-bold mb-3">Chào bạn 👋</h2>
           <p className="text-blue-100 mb-6">
-            Bắt đầu bằng cách nhập điểm dự kiến để nhận gợi ý ngành sắt với bạn.
+            Bắt đầu bằng cách nhập điểm dự kiến để nhận gợi ý ngành sát với bạn.
           </p>
           <div className="flex gap-3 mb-8">
             <button className="px-6 py-2 bg-white text-blue-600 rounded-lg font-bold hover:bg-gray-100 transition-colors flex items-center gap-2">
               <BookOpen size={18} />
               Hỏi cố vấn tuyển sinh
             </button>
-            <button className="px-6 py-2 border border-blue-200 text-white rounded-lg font-bold hover:bg-blue-500 transition-colors">
+            <button 
+              onClick={() => setIsModalOpen(true)}
+              className="px-6 py-2 border border-blue-200 text-white rounded-lg font-bold hover:bg-blue-500 transition-colors"
+            >
               Tìm ngành phù hợp
             </button>
           </div>
@@ -123,6 +137,42 @@ export default function AppDashboard() {
           <p className="text-sm font-medium text-gray-900">Cố vấn</p>
         </div>
       </div>
+
+      {/* Simulation Modal */}
+      {isModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
+          <div className="bg-white rounded-2xl w-full max-w-md shadow-2xl overflow-hidden">
+            <div className="p-4 border-b border-gray-100 flex justify-between items-center bg-blue-50">
+              <h3 className="font-bold text-gray-900 flex items-center gap-2">
+                <Lightbulb size={18} className="text-blue-500" /> Nhập điểm dự kiến
+              </h3>
+              <button onClick={() => setIsModalOpen(false)} className="text-gray-500 hover:text-gray-900 transition-colors p-1 rounded-full hover:bg-gray-200">
+                <X size={20} />
+              </button>
+            </div>
+            <form onSubmit={handleSimulateSubmit} className="p-6 space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Điểm thi dự kiến (Ví dụ: 24.5)</label>
+                <input required type="number" step="0.1" min="0" max="30" placeholder="Nhập điểm..." className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none" />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Tổ hợp môn</label>
+                <select className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                  <option>A00 (Toán, Lý, Hóa)</option>
+                  <option>A01 (Toán, Lý, Anh)</option>
+                  <option>B00 (Toán, Hóa, Sinh)</option>
+                  <option>D01 (Toán, Văn, Anh)</option>
+                </select>
+              </div>
+              <div className="pt-2">
+                <button type="submit" className="w-full py-3 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700 transition-colors">
+                  Nhận gợi ý ngành ngay
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

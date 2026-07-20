@@ -1,0 +1,7 @@
+1:"$Sreact.fragment"
+2:I[71699,["/smartcareer/_next/static/chunks/0g9qkcnu6zh5f.js","/smartcareer/_next/static/chunks/14xdthwga5u9i.js"],"ClientSegmentRoot"]
+3:I[64527,["/smartcareer/_next/static/chunks/0g9qkcnu6zh5f.js","/smartcareer/_next/static/chunks/14xdthwga5u9i.js","/smartcareer/_next/static/chunks/145jocqen0c2o.js"],"default"]
+4:I[12224,["/smartcareer/_next/static/chunks/0g9qkcnu6zh5f.js","/smartcareer/_next/static/chunks/14xdthwga5u9i.js"],"default"]
+5:I[67689,["/smartcareer/_next/static/chunks/0g9qkcnu6zh5f.js","/smartcareer/_next/static/chunks/14xdthwga5u9i.js"],"default"]
+0:{"rsc":["$","$1","c",{"children":[[["$","script","script-0",{"src":"/smartcareer/_next/static/chunks/145jocqen0c2o.js","async":true}]],["$","$L2",null,{"Component":"$3","slots":{"children":["$","$L4",null,{"parallelRouterKey":"children","template":["$","$L5",null,{}]}]},"serverProvidedParams":{"params":{},"promises":["$@6"]}}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"WRn7G1gqdJkDLph2mZ0-I"}
+6:"$0:rsc:props:children:1:props:serverProvidedParams:params"
